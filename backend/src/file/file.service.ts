@@ -1,16 +1,17 @@
-import { BadRequestException, Injectable } from "@nestjs/common";
-import { PrismaService } from "src/prisma/prisma.service";
+import { BadRequestException, Inject, Injectable } from "@nestjs/common";
 import { FileDto } from "./dto/file.dto";
+import { IMPORT_QUEUE } from "src/config";
+import { ClientProxy } from "@nestjs/microservices";
 
 @Injectable()
 export class FileService {
-    constructor(private readonly prismaService: PrismaService) {}
-    async uploadFile(fileDtos: FileDto[]) {
+    constructor(
+        @Inject(IMPORT_QUEUE) private client: ClientProxy
 
-       await this.prismaService.repositories.createMany({
-            data: fileDtos
-       })
-       return { message: "Importação concluída com sucesso!"};
+    ) {}
+    async uploadFile(fileDtos: FileDto[]) {
+        this.client.emit('files', fileDtos)
+        return { message: 'Importação enviada para processamento!'}
     }   
 
 }

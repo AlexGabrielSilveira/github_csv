@@ -1,5 +1,4 @@
 import { Body, Controller, Post, UploadedFile, UseInterceptors } from "@nestjs/common";
-import { FileInterceptor } from "@nestjs/platform-express";
 import { FileService } from "./file.service";
 import { FileDto } from "./dto/file.dto";
 

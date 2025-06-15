@@ -4,7 +4,9 @@ import { Response } from "express";
 
 @Controller('github')
 export class GithubController {
-    constructor(private readonly githubService: GithubService) {}
+    constructor(
+        private readonly githubService: GithubService,
+    ) {}
 
     @Get(':username/')
     async getUser(@Param('username') username: string) {
