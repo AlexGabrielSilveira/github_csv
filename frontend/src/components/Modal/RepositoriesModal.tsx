@@ -2,6 +2,7 @@ import axios from "axios";
 import { API_BASE_URL } from "../../config";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { toast, Toaster } from "sonner";
 
 interface RepositoryInterface {
   name: string;
@@ -29,7 +30,7 @@ function RepositoriesModal({ login, onClose }: RepositoriesModalProps) {
       const response = await axios.get(API_URL);
       setRepositories(response.data);
     } catch (error) {
-      alert("erro ao buscar repositorios!");
+      toast.error("erro ao buscar repositorios!");
     } finally {
       setLoading(false);
     }
@@ -48,7 +49,7 @@ function RepositoriesModal({ login, onClose }: RepositoriesModalProps) {
       link.parentNode?.removeChild(link);
       window.URL.revokeObjectURL(url);
     } catch (error) {
-      console.error("Erro ao exportar repositorios:", error);
+      toast.error("Erro ao exportar repositorios:");
     }
   };
 
@@ -59,6 +60,7 @@ function RepositoriesModal({ login, onClose }: RepositoriesModalProps) {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50">
+      <Toaster position="top-right" richColors closeButton />
       <div className="bg-white rounded-xl shadow-lg max-w-xl w-full p-6 overflow-hidden">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-xl font-bold text-gray-800">

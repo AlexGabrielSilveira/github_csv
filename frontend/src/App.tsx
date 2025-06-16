@@ -4,12 +4,16 @@ import ImportCSV from "./pages/ImportCSV";
 import { useEffect } from "react";
 import io from "socket.io-client";
 import { Toaster, toast } from "sonner";
+import { API_BASE_URL } from "./config";
 
 function App() {
   useEffect(() => {
-    const socket = io("http://localhost:3000");
+    const socket = io(API_BASE_URL);
     socket.on("job_finished", (data: any) => {
       toast.success(data.message || "Processamento concluído com sucesso! 🚀");
+    });
+    socket.on("import_failed", (data: any) => {
+      toast.error(data.message || "Falha na importação. ❌");
     });
     return () => {
       socket.disconnect();

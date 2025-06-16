@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { API_BASE_URL } from "../../config";
 import RepositoriesModal from "../Modal/RepositoriesModal";
 import { Link } from "react-router-dom";
+import { toast, Toaster } from "sonner";
 
 export interface GithubUser {
   login: string;
@@ -23,7 +24,7 @@ function SearchContainer() {
 
       setUserData(response.data);
     } catch (error) {
-       alert("Erro ao buscar usuário!");
+       toast.error("Erro ao buscar usuário!");
     }
   };
 
@@ -34,12 +35,13 @@ function SearchContainer() {
   return (
     <div className="min-h-screen bg-white text-gray-900 py-10 px-6 flex flex-col items-center">
       <div className="w-full max-w-2xl bg-white rounded-xl shadow-lg p-8 relative">
+        <Toaster position="top-right" richColors closeButton />
         <div className="absolute top-4 right-4">
           <Link to="/import" className="text-sm bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-md shadow transition"> Ir para Importação </Link>
         </div>
 
         <div className="text-sm text-gray-500 mb-4">
-          <span className="font-semibold">Pesquisa e Exportação</span> &gt; Importação e Visualização
+          <span className="font-semibold">💻Pesquisa e Exportação</span>
         </div>
         <h1 className="text-2xl font-bold mb-6">Busca de Repositórios GitHub</h1>
 

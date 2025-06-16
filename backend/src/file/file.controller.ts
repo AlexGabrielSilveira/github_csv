@@ -8,6 +8,6 @@ export class FileController {
 
     @Post('upload')
     async uploadFile(@Body() files: FileDto[]) {
-        return await this.fileService.uploadFile(files)
+        return await this.fileService.uploadFile(files) 
     }
 }

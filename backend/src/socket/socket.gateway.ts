@@ -6,7 +6,10 @@ export class SocketGateway {
   @WebSocketServer()
   server: Server;
 
-  notifyClient(message: string) {
+  notifyClientJobFinished(message: string) {
     this.server.emit('job_finished', { message });
+  }
+  notifyClientImportFailed(message: string) {
+    this.server.emit('import_failed', { message });
   }
 }
