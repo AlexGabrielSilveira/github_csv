@@ -51,8 +51,6 @@ function ImportCSV() {
       });
       setData([])
       setSelectCSV(!selectCSV)
-      setFilter('')
-      setLanguages([])
     } catch (error) {
       toast.error("Erro ao enviar arquivo!");
     }
